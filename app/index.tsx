@@ -3,7 +3,9 @@ import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-n
 import { useNavigation } from 'expo-router';
 import Details from './details';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useState} from "react"
+import React from 'react';
+
+
 
 
 export default function HomeScreen() {
