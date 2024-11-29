@@ -44,12 +44,12 @@ const Details = () => {
                 <View style={styles.data}>
                     <Text style={styles.labels}>Nombre completo:</Text>
                     {!parsedData?.userName && <View style={styles.textSkeleton}></View>}
-                    <Text>{parsedData?.userName}</Text>
+                    <Text style={styles.text}>{parsedData?.userName}</Text>
                 </View>
                 <View style={styles.data}>
                     <Text style={styles.labels}>Correo corporativo:</Text>
                     {!parsedData?.email && <View style={styles.textSkeleton}></View>}
-                    <Text>{parsedData?.email}</Text>
+                    <Text style={styles.text}>{parsedData?.email}</Text>
                 </View>
             </View>
             <View style={styles.buttonsContainer}>
@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
     dataContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 25
+        // marginBottom: 25,
+        gap: 25
     },
     data: {
         alignItems: 'center',
@@ -89,7 +90,9 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
+        gap: 20,
+        marginTop: 45
     },
     backButton: {
         color: 'white',
@@ -125,8 +128,12 @@ const styles = StyleSheet.create({
     labels: {
         color: '#BFD732',
         padding: 2,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "600"
+    },
+    text: {
+        color: "#7B7B7B",
+        fontSize: 18
     },
     image: {
         position: "absolute",
