@@ -1,42 +1,52 @@
 import { Link } from 'expo-router';
-import { View, Image, StyleSheet, Button, Alert, Pressable } from 'react-native';
+import { View, Image, StyleSheet, Pressable, Text } from 'react-native';
+
 export default function Home() {
-  const handlePress = () => {
-    Alert.alert('¡Botón presionado!', 'Has presionado el botón Comenzar.');
-  };
   return (
     <View style={styles.container}>
+      
       <Image
-        source={{ uri: 'https://es.wikipedia.org/wiki/Archivo:Globant-LightBG-Color@3x.png' }}
+        source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Globant-LightBG-Color%403x.png' }}
         style={styles.image}
       />
-      <View style={styles.buttonContainer}>
-        <Button title="Comenzar" onPress={handlePress} color="#4CAF50" />
-        <Pressable>
-          <Link
-          href={"./Home"}>
-            Empezar pa
-          </Link>
-        </Pressable>
-      </View>
+      
+      <Pressable style={styles.button}>
+        <Link href="/Home" style={styles.linkText}>
+          Comenzar
+        </Link>
+      </Pressable>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
+    padding: 20, 
   },
   image: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
+    width: 200, 
+    height: 60, 
+    marginBottom: 30, 
   },
-  buttonContainer: {
-    width: '80%',
-    borderRadius: 10,
-    overflow: 'hidden',
+  button: {
+    backgroundColor: '#BFD732',
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    borderRadius: 25, 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3, 
+  },
+  linkText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: 'bold', 
   },
 });
