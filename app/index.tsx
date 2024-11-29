@@ -1,50 +1,24 @@
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from 'expo-router';
-import Details from './details';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
-
-
-
-
-export default function HomeScreen() {
-    const router = useNavigation()
-  const [permission, requestPermission] = useCameraPermissions();
-  if (!permission) {
-    return <View />;
-  }
-  if (!permission.granted) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.message}>Necesitamos permisos para acceder a la cámara</Text>
-        <Button onPress={requestPermission} title="Conceder" />
-      </View>
-    );
-  }
+import { Link } from 'expo-router';
+import { View, Image, StyleSheet, Button, Alert, Pressable } from 'react-native';
+export default function Home() {
+  const handlePress = () => {
+    Alert.alert('¡Botón presionado!', 'Has presionado el botón Comenzar.');
+  };
   return (
     <View style={styles.container}>
-      <CameraView
-      barcodeScannerSettings={{
-        barcodeTypes: ["qr"],
-      }}
-      onBarcodeScanned={
-      async (data)=> {
-       console.log("esta es la data", data);
-       await AsyncStorage.setItem('@data', JSON.stringify(data))
-       router.navigate('details');
-      }
-      }
-      style={styles.camera} >
-        <View style={styles.buttonContainer}>
-        </View>
-      </CameraView>
       <Image
-        style={styles.logo}
-        source={{
-          uri: 'https://th.bing.com/th?q=Globant+Company+Logo&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=es-XL&cc=CO&setlang=en&adlt=moderate&t=1&mw=247',
-        }}
+        source={{ uri: 'https://es.wikipedia.org/wiki/Archivo:Globant-LightBG-Color@3x.png' }}
+        style={styles.image}
       />
+      <View style={styles.buttonContainer}>
+        <Button title="Comenzar" onPress={handlePress} color="#4CAF50" />
+        <Pressable>
+          <Link
+          href={"./Home"}>
+            Empezar pa
+          </Link>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -53,50 +27,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
-  message: {
-    textAlign: 'center',
-    paddingBottom: 10,
-  },
-  camera: {
-    width: 300,
-    height: 300,
-    borderRadius: 20,
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-    margin: 64,
-  },
-  button: {
-    flex: 1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  greenButton: {
-    backgroundColor: 'green',
-    padding: 10,
+    width: '80%',
     borderRadius: 10,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  logo: {
-    width: 200,
-    height: 100,
-    resizeMode: 'contain',
-    position: 'absolute',
-    bottom: 20,
-    left: 10,
+    overflow: 'hidden',
   },
 });
