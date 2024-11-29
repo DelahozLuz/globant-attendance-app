@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from "react";
+import { Link } from "expo-router";
 
 const Details = () => {
     const [data, setData] = useState({});
@@ -18,6 +19,9 @@ const Details = () => {
 
     return (
         <View style={styles.container}>
+            <Pressable>
+                <Link href={'./Home'} style={styles.backButton}>Volver</Link>
+            </Pressable>
             <View style={styles.dataContainer}>
                 <View style={styles.data}>
                     <Text style={styles.labels}>Nombre completo:</Text>
@@ -61,6 +65,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
+    },
+    backButton: {
+        backgroundColor: '#BFD732',
+        color: 'white',
+        padding: 10,
+        borderRadius: 24
     },
     buttons: {
         padding: 10,
