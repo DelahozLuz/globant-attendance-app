@@ -1,10 +1,16 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from "react";
 import { Link } from "expo-router";
+import { getParsedData } from "@/utils/helpers";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Image } from "react-native";
+import { ParsedData, QRData } from "@/types/types";
 
 const Details = () => {
-    const [data, setData] = useState({});
+    const [data, setData] = useState<QRData | null>(null);
+    const [parsedData, setParsedData] = useState<ParsedData | null>(null);
+
     const getData = async () => {
         const userData = await AsyncStorage.getItem('@data');
         if (userData) {
@@ -17,29 +23,47 @@ const Details = () => {
         getData();
     }, []);
 
+    useEffect(() => {
+        if (data?.data) {
+            try {
+                const parsed = getParsedData(data.data);
+                setParsedData(parsed);
+            } catch (error) {
+                console.error("Error al analizar los datos:", error);
+            }
+        }
+    }, [data]);
+
     return (
         <View style={styles.container}>
-            <Pressable>
+            <Pressable style={styles.containerBackButton}>
+                <Ionicons name="arrow-back" size={20} color="white" />
                 <Link href={'./Home'} style={styles.backButton}>Volver</Link>
             </Pressable>
             <View style={styles.dataContainer}>
                 <View style={styles.data}>
                     <Text style={styles.labels}>Nombre completo:</Text>
-                    <Text>{data.data}</Text>
+                    {!parsedData?.userName && <View style={styles.textSkeleton}></View>}
+                    <Text>{parsedData?.userName}</Text>
                 </View>
                 <View style={styles.data}>
                     <Text style={styles.labels}>Correo corporativo:</Text>
-                    <Text>steven.gs@globant</Text>
+                    {!parsedData?.email && <View style={styles.textSkeleton}></View>}
+                    <Text>{parsedData?.email}</Text>
                 </View>
             </View>
             <View style={styles.buttonsContainer}>
-                <Pressable style={styles.buttons}>
-                    <Text style={styles.redButton}>Rechazar</Text>
-                </Pressable>
-                <Pressable style={styles.buttons}>
-                    <Text style={styles.greenButton}>Aceptar</Text>
-                </Pressable>
+                <TouchableOpacity style={styles.buttons}>
+                    <Link href={"./Home"}><Ionicons name="close-circle" size={70} color="red" /></Link>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttons}>
+                    <Link href={"./Home"}><Ionicons name="checkmark-circle" size={70} color="#BFD732" /></Link>
+                </TouchableOpacity>
             </View>
+            <Image
+                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Globant-LightBG-Color%403x.png' }}
+                style={styles.image}
+            />
         </View>
     );
 };
@@ -59,7 +83,8 @@ const styles = StyleSheet.create({
     },
     data: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 10
     },
     buttonsContainer: {
         flexDirection: 'row',
@@ -67,10 +92,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     backButton: {
-        backgroundColor: '#BFD732',
         color: 'white',
-        padding: 10,
         borderRadius: 24
+    },
+    containerBackButton: {
+        position: "absolute",
+        backgroundColor: '#BFD732',
+        padding: 10,
+        flexDirection: "row",
+        borderRadius: 24,
+        alignItems: "center",
+        justifyContent: "center",
+        top: 30,
+        left: 30
     },
     buttons: {
         padding: 10,
@@ -90,6 +124,21 @@ const styles = StyleSheet.create({
     },
     labels: {
         color: '#BFD732',
-        padding: 2
+        padding: 2,
+        fontSize: 16,
+        fontWeight: "600"
+    },
+    image: {
+        position: "absolute",
+        width: 100,
+        height: 30,
+        bottom: 30,
+        left: 30
+    },
+    textSkeleton: {
+        backgroundColor: "gray",
+        height: "100%",
+        width: "100%",
+        borderRadius: 24
     }
 })
