@@ -16,3 +16,9 @@ export const getParsedData = (string: string) => {
         userName
     }
 }
+
+export const routes = {
+    details: '/Details' as '/Details',
+    index: '/index' as '/index',
+    qr: '/Qrscreen' as '/Qrscreen',
+};

@@ -2,10 +2,20 @@ import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from "react";
 import { Link } from "expo-router";
-import { getParsedData } from "@/utils/helpers";
+import { getParsedData, routes } from "@/utils/helpers";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from "react-native";
 import { ParsedData, QRData } from "@/types/types";
+import AppLoading from 'expo-app-loading';
+import {
+    useFonts,
+    Poppins_300Light,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    Poppins_800ExtraBold,
+} from '@expo-google-fonts/poppins';
 
 const Details = () => {
     const [data, setData] = useState<QRData | null>(null);
@@ -38,9 +48,10 @@ const Details = () => {
         <View style={styles.container}>
             <Pressable style={styles.containerBackButton}>
                 <Ionicons name="arrow-back" size={20} color="white" />
-                <Link href={'./Home'} style={styles.backButton}>Volver</Link>
+                <Link href={routes.qr} style={styles.backButton}>Volver</Link>
             </Pressable>
             <View style={styles.dataContainer}>
+                <View><Text style={styles.title}>Información del <Text style={styles.globerText}>Glober</Text></Text></View>
                 <View style={styles.data}>
                     <Text style={styles.labels}>Nombre completo:</Text>
                     {!parsedData?.userName && <View style={styles.textSkeleton}></View>}
@@ -54,10 +65,10 @@ const Details = () => {
             </View>
             <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.buttons}>
-                    <Link href={"./Home"}><Ionicons name="close-circle" size={70} color="red" /></Link>
+                    <Link href={routes.qr}><Ionicons name="close-circle" size={70} color="red" /></Link>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttons}>
-                    <Link href={"./Home"}><Ionicons name="checkmark-circle" size={70} color="#BFD732" /></Link>
+                    <Link href={routes.qr}><Ionicons name="checkmark-circle" size={70} color="#BFD732" /></Link>
                 </TouchableOpacity>
             </View>
             <Image
@@ -74,13 +85,25 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+        fontFamily: 'Poppins_500Medium'
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: "bold"
+    },
+    globerText: {
+        color: "#BFD732"
     },
     dataContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         // marginBottom: 25,
-        gap: 25
+        gap: 25,
+        borderColor: "rgba(0, 0, 0, 0.08)",
+        borderWidth: 1,
+        borderRadius: 24,
+        padding: 25,
     },
     data: {
         alignItems: 'center',
@@ -133,7 +156,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#7B7B7B",
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: 'Poppins_500Medium'
     },
     image: {
         position: "absolute",
@@ -143,9 +167,9 @@ const styles = StyleSheet.create({
         left: 30
     },
     textSkeleton: {
-        backgroundColor: "gray",
-        height: "100%",
-        width: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.07)",
+        height: 18,
+        width: 150,
         borderRadius: 24
     }
 })

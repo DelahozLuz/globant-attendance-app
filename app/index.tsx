@@ -1,3 +1,4 @@
+import { routes } from '@/utils/helpers';
 import { Link } from 'expo-router';
 import { View, Image, StyleSheet, Pressable, Text } from 'react-native';
 
@@ -11,7 +12,7 @@ export default function Home() {
       />
       
       <Pressable style={styles.button}>
-        <Link href="/Home" style={styles.linkText}>
+        <Link href={routes.qr} style={styles.linkText}>
           Comenzar
         </Link>
       </Pressable>

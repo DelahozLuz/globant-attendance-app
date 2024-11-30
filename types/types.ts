@@ -26,3 +26,10 @@ export interface ParsedData {
     email: string;
     userName: string,
 }
+
+export type RootStackParamList = {
+    index: undefined;
+    Details: undefined;
+    Qrscreen: undefined;
+};
+
