@@ -24,7 +24,6 @@ export interface QRData {
 
 export interface ParsedData {
     email: string;
-    userName: string,
 }
 
 export type RootStackParamList = {
@@ -32,4 +31,3 @@ export type RootStackParamList = {
     details: undefined;
     qrscreen: undefined;
 };
-

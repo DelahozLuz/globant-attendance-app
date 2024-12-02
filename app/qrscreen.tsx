@@ -28,7 +28,7 @@ export default function QrScreen() {
         }}
         onBarcodeScanned={
           async (data) => {
-            console.log("esta es la data", data);
+
             await AsyncStorage.setItem('@data', JSON.stringify(data))
             router.navigate('details');
           }

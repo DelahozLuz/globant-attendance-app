@@ -1,19 +1,13 @@
-export const getParsedData = (string: string) => {
-    const parts = string.split(",").map(part => part.trim());
-    if (parts.length !== 2) {
-        throw new Error("La cadena de entrada no tiene el formato esperado.");
-    }
+export const validateEmail = (string: string) => {
+    const email = string.replace("Email: ", "");
+    const isValidEmail = email.includes("@globant.com")
 
-    const email = parts[0].split(":")[1]?.trim(); 
-    const userName = parts[1].split(":")[1]?.trim(); 
-
-    if (!email || !userName) {
-        throw new Error("No se pudo extraer el email o el username.");
+    if (!isValidEmail) {
+        return {}
     }
 
     return {
         email,
-        userName
     }
 }
 
