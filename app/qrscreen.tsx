@@ -15,7 +15,7 @@ export default function QrScreen() {
   if (!permission.granted) {
     return (
       <View style={styles.container}>
-        <Text style={styles.message}>Necesitamos permisos para acceder a la cámara</Text>
+        <Text style={styles.message}>Necesitamos permisos para acceder a la cámara.</Text>
         <Button onPress={requestPermission} title="Permitir" />
       </View>
     );
