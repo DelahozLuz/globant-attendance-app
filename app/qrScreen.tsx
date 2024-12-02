@@ -30,7 +30,7 @@ export default function QrScreen() {
           async (data) => {
             console.log("esta es la data", data);
             await AsyncStorage.setItem('@data', JSON.stringify(data))
-            router.navigate('Details');
+            router.navigate('details');
           }
         }
         style={styles.camera} >

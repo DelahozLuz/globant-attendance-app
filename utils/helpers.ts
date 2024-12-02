@@ -18,7 +18,7 @@ export const getParsedData = (string: string) => {
 }
 
 export const routes = {
-    details: '/Details' as '/Details',
+    details: '/details' as '/details',
     index: '/index' as '/index',
-    qr: '/Qrscreen' as '/Qrscreen',
+    qr: '/qrscreen' as '/qrscreen',
 };

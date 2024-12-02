@@ -29,7 +29,7 @@ export interface ParsedData {
 
 export type RootStackParamList = {
     index: undefined;
-    Details: undefined;
-    Qrscreen: undefined;
+    details: undefined;
+    qrscreen: undefined;
 };
 

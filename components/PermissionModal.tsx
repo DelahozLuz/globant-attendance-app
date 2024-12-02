@@ -1,3 +1,4 @@
+import { useCameraPermissions } from "expo-camera"
 import { Button, Text, View } from "react-native"
 
 const PermissionModal = () => {
