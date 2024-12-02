@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "expo-router";
 import { validateEmail, routes } from "@/utils/helpers";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from "react-native";
 import { ParsedData, QRData } from "@/types/types";
 import { Banner } from "@/components/Banner";
@@ -88,7 +89,7 @@ const Details = () => {
             }
             <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.buttons}>
-                    <Link href={routes.qr}><Ionicons name="home" size={70} color="red" /></Link>
+                    <Link href={routes.qr}><MaterialCommunityIcons name="home-circle" size={70} color="red" /></Link>
                 </TouchableOpacity>
                 {
                     ShowApprovalButton && (
