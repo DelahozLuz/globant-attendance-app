@@ -88,7 +88,7 @@ const Details = () => {
             }
             <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.buttons}>
-                    <Link href={routes.qr}><Ionicons name="close-circle" size={70} color="red" /></Link>
+                    <Link href={routes.qr}><Ionicons name="home" size={70} color="red" /></Link>
                 </TouchableOpacity>
                 {
                     ShowApprovalButton && (
