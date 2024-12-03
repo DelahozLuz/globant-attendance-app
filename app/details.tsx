@@ -1,4 +1,5 @@
 import { ActivityIndicator } from "react-native";
+import { Audio } from 'expo-av';
 import { Image } from "react-native";
 import { Link } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -48,12 +49,14 @@ const Details = () => {
         setIsvalid(response.isValid);
         setShowBanner(true);
         setIsLoading(false);
+        playAudio(response.isValid ? require('./../assets/audio/checked.mp3') : require('./../assets/audio/error.mp3'));
       } catch (error) {
         setShowApprovalButton(false);
         setMessage("Un error ha ocurrido");
         setIsvalid(false);
         setShowBanner(true);
         setIsLoading(false);
+        playAudio(require('./../assets/audio/error.mp3'));
       }
     }
   };
@@ -80,6 +83,11 @@ const Details = () => {
       }
     }
   }, [data]);
+
+  const playAudio = async (audioFile: any) => {
+    const { sound } = await Audio.Sound.createAsync(audioFile);
+    await sound.playAsync();
+  };
 
   return (
     <>
