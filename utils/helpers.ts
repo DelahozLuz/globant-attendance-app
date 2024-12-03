@@ -16,7 +16,3 @@ export const routes = {
     index: '/index' as '/index',
     qr: '/qrscreen' as '/qrscreen',
 };
-
-
-
-
