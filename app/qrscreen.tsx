@@ -1,13 +1,21 @@
+import { Audio } from 'expo-av';
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
+
 import { RootStackParamList } from "@/types/types";
+
 export default function QrScreen() {
   const router = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [permission, requestPermission] = useCameraPermissions();
+  const playAudio = async (audioFile: any) => {
+    const { sound } = await Audio.Sound.createAsync(audioFile);
+    await sound.playAsync();
+  };
+
   if (!permission) {
     return <View />;
   }
@@ -28,6 +36,7 @@ export default function QrScreen() {
           barcodeTypes: ["qr"],
         }}
         onBarcodeScanned={async (data) => {
+          playAudio(require('./../assets/audio/scanned.mp3'));
           await AsyncStorage.setItem("@data", JSON.stringify(data));
           router.navigate("details");
         }}
