@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 
 import { RootStackParamList } from "@/types/types";
+
 export default function QrScreen() {
   const router = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [permission, requestPermission] = useCameraPermissions();
